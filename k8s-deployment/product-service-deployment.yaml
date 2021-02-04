@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sc-product-service-deployment
+  namespace: default
+  labels:
+    app: sc-product-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sc-product-service
+  template:
+    metadata:
+      labels:
+        app: sc-product-service
+    spec:
+      containers:
+        - name: sc-product-service
+          image: tsalm/sc-product-service
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PRODUCT_SERVICE_PRODUCT_NAMES
+              value: "Product1, Product2"

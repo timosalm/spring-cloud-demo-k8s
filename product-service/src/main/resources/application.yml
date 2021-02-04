@@ -1,0 +1,4 @@
+spring:
+  application.name: sc-product-service # for config server and service-registry
+  cloud.kubernetes.discovery.all-namespaces: true
+product-service.product-names:
