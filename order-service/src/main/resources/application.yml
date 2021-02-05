@@ -1,0 +1,22 @@
+spring:
+  jpa.hibernate.ddl-auto: update
+  datasource:
+    url: jdbc:mysql://${order.database.host}:3306/${order.database.name}
+    username:
+    password:
+  application.name: sc-order-service # for config server and service-registry
+  cloud:
+    loadbalancer.ribbon.enabled: false
+    kubernetes.loadbalancer.mode: SERVICE
+    kubernetes.discovery.all-namespaces: true
+  redis:
+    host:
+    password:
+order:
+  exchange-name:
+  shipping-exchange-name:
+  products-api-url:
+  database:
+    host:
+    name:
+logging.level.org.springframework.cache: TRACE

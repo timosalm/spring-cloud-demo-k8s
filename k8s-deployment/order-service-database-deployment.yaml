@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sc-order-service-database-deployment
+  namespace: default
+  labels:
+    app: sc-order-service-database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sc-order-service-database
+  template:
+    metadata:
+      labels:
+        app: sc-order-service-database
+    spec:
+      containers:
+        - name: sc-order-service-database
+          image: bitnami/mysql:latest
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: sc-order-service-database-secret
+                  key: username
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: sc-order-service-database-secret
+                  key: password
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: sc-order-service-database-configmap
+                  key: database

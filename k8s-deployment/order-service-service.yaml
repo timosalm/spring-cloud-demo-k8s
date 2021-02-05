@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sc-order-service-service
+spec:
+  selector:
+    app: sc-order-service
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

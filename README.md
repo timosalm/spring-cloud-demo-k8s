@@ -9,8 +9,11 @@
    ```
    CONTAINER_REGISTRY_PREFIX=<your-registry-prefix>  # If you are using Docker Hub as a registry the prefix is just your Docker Hub ID
    ./mvnw spring-boot:build-image -pl product-service -Dspring-boot.build-image.imageName=${CONTAINER_REGISTRY_PREFIX}/sc-product-service
+   ./mvnw spring-boot:build-image -pl order-service -Dspring-boot.build-image.imageName=${CONTAINER_REGISTRY_PREFIX}/sc-order-service
+   
    docker login # If you are not using Docker Hub you have to specify the host of the registry 
    docker push ${CONTAINER_REGISTRY_PREFIX}/sc-product-service
+   docker push ${CONTAINER_REGISTRY_PREFIX}/sc-order-service
    ```
 2. Create private registry secret resource
    ```

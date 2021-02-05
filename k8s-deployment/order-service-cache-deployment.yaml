@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sc-order-service-cache-deployment
+  namespace: default
+  labels:
+    app: sc-order-service-cache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sc-order-service-cache
+  template:
+    metadata:
+      labels:
+        app: sc-order-service-cache
+    spec:
+      containers:
+        - name: sc-order-service-cache
+          image: bitnami/redis:latest
+          ports:
+            - containerPort: 6379
+          env:
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: sc-order-service-cache-secret
+                  key: password

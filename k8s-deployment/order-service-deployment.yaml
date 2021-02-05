@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sc-order-service-deployment
+  namespace: default
+  labels:
+    app: sc-order-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sc-order-service
+  template:
+    metadata:
+      labels:
+        app: sc-order-service
+    spec:
+      containers:
+        - name: sc-order-service
+          image: tsalm/sc-order-service
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ORDER_PRODUCTS_API_URL
+              value: "http://sc-product-service-service/api/v1/products"
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: sc-order-service-database-secret
+                  key: username
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: sc-order-service-database-secret
+                  key: password
+            - name: ORDER_DATABASE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: sc-order-service-database-configmap
+                  key: database
+            - name: ORDER_DATABASE_HOST
+              value: "sc-order-service-database-service"
+            - name: SPRING_REDIS_HOST
+              value: "sc-order-service-cache-service"
+            - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_CACHE
+              value: TRACE
+            - name: SPRING_REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: sc-order-service-cache-secret
+                  key: password
