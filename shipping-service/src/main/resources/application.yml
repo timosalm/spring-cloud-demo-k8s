@@ -1,0 +1,15 @@
+spring:
+  application.name: sc-shipping-service # for config server and service-registry
+  cloud:
+    kubernetes.discovery.all-namespaces: true
+    stream.bindings:
+      shipOrder-in-0.destination: ${shipping.in-exchange}
+      shipOrder-out-0.destination: ${shipping.out-exchange}
+  rabbitmq:
+    host:
+    username:
+    password:
+shipping:
+  in-exchange:
+  out-exchange:
+  duration:

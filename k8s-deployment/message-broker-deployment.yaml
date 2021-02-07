@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: message-broker-deployment
+  namespace: default
+  labels:
+    app: sc-message-broker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sc-message-broker
+  template:
+    metadata:
+      labels:
+        app: sc-message-broker
+    spec:
+      containers:
+        - name: sc-message-broker
+          image: rabbitmq
+          ports:
+            - containerPort: 5672
+            - containerPort: 15672
+          env:
+            - name: RABBITMQ_DEFAULT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: sc-message-broker-secret
+                  key: username
+            - name: RABBITMQ_DEFAULT_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: sc-message-broker-secret
+                  key: password

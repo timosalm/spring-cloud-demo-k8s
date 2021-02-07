@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sc-shipping-service-deployment
+  namespace: default
+  labels:
+    app: sc-shipping-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sc-shipping-service
+  template:
+    metadata:
+      labels:
+        app: sc-shipping-service
+    spec:
+      containers:
+        - name: sc-shipping-service
+          image: tsalm/sc-shipping-service
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SHIPPING_IN_EXCHANGE
+              value: "order-shipping-exchange"
+            - name: SHIPPING_OUT_EXCHANGE
+              value: "order-delivered-exchange"
+            - name: SHIPPING_DURATION
+              value: "10000"
+            - name: SPRING_RABBITMQ_HOST
+              value: "sc-message-broker-service"
+            - name: SPRING_RABBITMQ_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: sc-message-broker-secret
+                  key: username
+            - name: SPRING_RABBITMQ_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: sc-message-broker-secret
+                  key: password

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sc-message-broker-service
+spec:
+  selector:
+    app: sc-message-broker
+  ports:
+    - protocol: TCP
+      port: 5672
+      targetPort: 5672
+      name: default
+    - protocol: TCP
+      port: 15672
+      targetPort: 15672
+      name: api-web-ui

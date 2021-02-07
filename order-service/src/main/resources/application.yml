@@ -12,6 +12,10 @@ spring:
   redis:
     host:
     password:
+  rabbitmq:
+    username:
+    password:
+    host:
 order:
   exchange-name:
   shipping-exchange-name:
