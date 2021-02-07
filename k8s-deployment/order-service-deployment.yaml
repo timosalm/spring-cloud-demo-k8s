@@ -22,7 +22,7 @@ spec:
             - containerPort: 8080
           env:
             - name: ORDER_PRODUCTS_API_URL
-              value: "http://sc-product-service-service/api/v1/products"
+              value: "http://sc-product-service-service:8080/api/v1/products"
             - name: SPRING_DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:

@@ -11,11 +11,13 @@
    ./mvnw spring-boot:build-image -pl product-service -Dspring-boot.build-image.imageName=${CONTAINER_REGISTRY_PREFIX}/sc-product-service
    ./mvnw spring-boot:build-image -pl order-service -Dspring-boot.build-image.imageName=${CONTAINER_REGISTRY_PREFIX}/sc-order-service
    ./mvnw spring-boot:build-image -pl shipping-service -Dspring-boot.build-image.imageName=${CONTAINER_REGISTRY_PREFIX}/sc-shipping-service
+   ./mvnw spring-boot:build-image -pl gateway -Dspring-boot.build-image.imageName=${CONTAINER_REGISTRY_PREFIX}/sc-gateway
 
    docker login # If you are not using Docker Hub you have to specify the host of the registry 
    docker push ${CONTAINER_REGISTRY_PREFIX}/sc-product-service
    docker push ${CONTAINER_REGISTRY_PREFIX}/sc-order-service
    docker push ${CONTAINER_REGISTRY_PREFIX}/sc-shipping-service
+   docker push ${CONTAINER_REGISTRY_PREFIX}/sc-gateway
    ```
 2. Create private registry secret resource
    ```
@@ -27,3 +29,30 @@
     ```
     kubectl create -f k8s-deployment
     ```
+
+## API usage 
+
+Set the host name of the `sc-gateway-service`. If service type LoadBalancer is supported in your cluster with
+```
+GATEWAY_HOST_NAME=$(kubectl get service sc-gateway-service -ojsonpath='{.status.loadBalancer.ingress[0].hostname}')
+```
+otherwise with 
+```
+GATEWAY_HOST_NAME=$(kubectl get service sc-gateway-service -ojsonpath='{.spec.clusterIP}')
+```
+ 
+- Fetch products:
+	```
+	curl http://${GATEWAY_HOST_NAME}/SC-PRODUCT-SERVICE/api/v1/products
+	```
+- Fetch orders:
+	```
+	curl http://${GATEWAY_HOST_NAME}/SC-ORDER-SERVICE/api/v1/orders
+	```
+- Create order (After 10 seconds the status of the order should be DELIVERED)
+	```
+	curl --header "Content-Type: application/json" --request POST \
+	  --data '{"productId":1,"shippingAddress":"Test address"}' \
+	  http://${GATEWAY_HOST_NAME}/SC-ORDER-SERVICE/api/v1/orders
+	```
+ 
