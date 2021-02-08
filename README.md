@@ -3,6 +3,8 @@
 **See repository [here](https://github.com/tsalm-pivotal/spring-cloud-demo) for the same application deployed on TAS/PCF/CF**
 **See repository [here](https://github.com/tsalm-pivotal/spring-cloud-demo-asc) for the same application deployed on Azure Spring Cloud**
 
+![](architecture.png)
+
 ## Deployment
 
 1. Ensure you have a local Docker installed and running, then execute:
