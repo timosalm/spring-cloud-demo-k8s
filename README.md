@@ -32,6 +32,8 @@
     ```
     kubectl create -f k8s-deployment
     ```
+***Hint:** For a more production-ready deployment of the data and messaging services, operators/helm charts like the [OSS RabbitMQ operator](https://www.rabbitmq.com/kubernetes/operator/quickstart-operator.html) or the ones available at the [Bitnami community catalog](https://bitnami.com/stacks/helm) are recommended instead of the container image deployments in  the k8s-deployment dir.*
+
 
 ## API usage 
 
