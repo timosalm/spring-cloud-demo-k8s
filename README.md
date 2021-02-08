@@ -1,6 +1,7 @@
 # Demo for a typical Spring Cloud Architecture on Kubernetes
 
 **See repository [here](https://github.com/tsalm-pivotal/spring-cloud-demo) for the same application deployed on TAS/PCF/CF**
+
 **See repository [here](https://github.com/tsalm-pivotal/spring-cloud-demo-asc) for the same application deployed on Azure Spring Cloud**
 
 ![](architecture.png)
@@ -25,9 +26,9 @@
    ```
    kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email>
    ```
-4. Pods with the spring-cloud-kubernetes dependency requires access to the Kubernetes API. 
+3. Pods with the spring-cloud-kubernetes dependency requires access to the Kubernetes API. 
    See information [here](https://docs.spring.io/spring-cloud-kubernetes/docs/current/reference/html/#service-account) and change/delete the [k8s-deployment/rbac.yaml](k8s-deployment/rbac.yaml) based on your requirements.       
-5. Create all required Kubernetes resources
+4. Create all required Kubernetes resources
     ```
     kubectl create -f k8s-deployment
     ```
