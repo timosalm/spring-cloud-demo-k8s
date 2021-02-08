@@ -43,16 +43,16 @@ GATEWAY_HOST_NAME=$(kubectl get service sc-gateway-service -ojsonpath='{.spec.cl
  
 - Fetch products:
 	```
-	curl http://${GATEWAY_HOST_NAME}/SC-PRODUCT-SERVICE/api/v1/products
+	curl http://${GATEWAY_HOST_NAME}/sc-product-service-service/api/v1/products
 	```
 - Fetch orders:
 	```
-	curl http://${GATEWAY_HOST_NAME}/SC-ORDER-SERVICE/api/v1/orders
+	curl http://${GATEWAY_HOST_NAME}/sc-order-service-service/api/v1/orders
 	```
 - Create order (After 10 seconds the status of the order should be DELIVERED)
 	```
 	curl --header "Content-Type: application/json" --request POST \
 	  --data '{"productId":1,"shippingAddress":"Test address"}' \
-	  http://${GATEWAY_HOST_NAME}/SC-ORDER-SERVICE/api/v1/orders
+	  http://${GATEWAY_HOST_NAME}/sc-order-service-service/api/v1/orders
 	```
  

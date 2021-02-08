@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sc-gateway-deployment
+  namespace: default
+  labels:
+    app: sc-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sc-gateway
+  template:
+    metadata:
+      labels:
+        app: sc-gateway
+    spec:
+      containers:
+        - name: sc-gateway
+          image: tsalm/sc-gateway
+          ports:
+            - containerPort: 8080

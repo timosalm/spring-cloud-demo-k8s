@@ -1,7 +1,11 @@
 spring:
   application.name: sc-gateway # for config server and service-registry
   cloud:
-    gateway.discovery.locator.enabled: true
+    gateway.discovery.locator:
+      enabled: true
     loadbalancer.ribbon.enabled: false
-    kubernetes.loadbalancer.mode: SERVICE
-    kubernetes.discovery.all-namespaces: true
+    kubernetes:
+      loadbalancer.mode: SERVICE
+      config.namespace: default
+      discovery.service-labels:
+        gateway: expose
