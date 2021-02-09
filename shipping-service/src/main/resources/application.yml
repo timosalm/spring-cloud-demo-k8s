@@ -1,7 +1,11 @@
 spring:
   application.name: sc-shipping-service # for config server and service-registry
   cloud:
-    kubernetes.discovery.all-namespaces: true
+    kubernetes:
+      discovery.all-namespaces: true
+      reload:
+        enabled: true
+        strategy: restart_context
     stream.bindings:
       shipOrder-in-0.destination: ${shipping.in-exchange}
       shipOrder-out-0.destination: ${shipping.out-exchange}
@@ -13,3 +17,6 @@ shipping:
   in-exchange:
   out-exchange:
   duration:
+management:
+  endpoint.restart.enabled: true
+  endpoints.web.exposure.include: restart

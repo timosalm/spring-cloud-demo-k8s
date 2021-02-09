@@ -20,6 +20,3 @@ spec:
           image: tsalm/sc-product-service
           ports:
             - containerPort: 8080
-          env:
-            - name: PRODUCT_SERVICE_PRODUCT_NAMES
-              value: "Product1, Product2"

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sc-order-service
+data:
+  spring.redis.host: "sc-order-service-cache-service"
+  spring.rabbitmq.host: "sc-message-broker-service"
+  order.database.host: "sc-order-service-database-service"
+  order.exchange-name: "order-delivered-exchange"
+  order.shipping-exchange-name: "order-shipping-exchange"
+  order.products-api-url: "lb://sc-product-service-service/api/v1/products"

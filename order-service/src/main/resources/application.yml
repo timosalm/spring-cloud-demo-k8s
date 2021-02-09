@@ -7,8 +7,12 @@ spring:
   application.name: sc-order-service # for config server and service-registry
   cloud:
     loadbalancer.ribbon.enabled: false
-    kubernetes.loadbalancer.mode: SERVICE
-    kubernetes.discovery.all-namespaces: true
+    kubernetes:
+      loadbalancer.mode: SERVICE
+      discovery.all-namespaces: true
+      reload:
+        enabled: true
+        strategy: restart_context
   redis:
     host:
     password:
@@ -24,3 +28,6 @@ order:
     host:
     name:
 logging.level.org.springframework.cache: TRACE
+management:
+  endpoint.restart.enabled: true
+  endpoints.web.exposure.include: restart

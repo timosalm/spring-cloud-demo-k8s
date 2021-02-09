@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sc-shipping-service
+data:
+  spring.rabbitmq.host: "sc-message-broker-service"
+  shipping.in-exchange: "order-shipping-exchange"
+  shipping.out-exchange: "order-delivered-exchange"
+  shipping.duration: "10000"

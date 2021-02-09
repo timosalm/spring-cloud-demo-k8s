@@ -59,3 +59,5 @@ GATEWAY_HOST_NAME=$(kubectl get service sc-gateway-service -ojsonpath='{.spec.cl
 	  http://${GATEWAY_HOST_NAME}/sc-order-service-service/api/v1/orders
 	```
  
+The Spring Cloud Kubernetes Config project makes Kubernetes ConfigMap instances available during application bootstrapping and triggers hot reloading of beans or Spring context when changes are detected on observed ConfigMap instances.
+To demonstrate this functionality, fetch the products, change the product names in the sc-product-service configmap (k8s-deployment/product-service-configmap.yaml) and fetch the products again.

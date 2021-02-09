@@ -21,8 +21,6 @@ spec:
           ports:
             - containerPort: 8080
           env:
-            - name: ORDER_PRODUCTS_API_URL
-              value: "http://sc-product-service-service:8080/api/v1/products"
             - name: SPRING_DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:
@@ -38,21 +36,11 @@ spec:
                 configMapKeyRef:
                   name: sc-order-service-database-configmap
                   key: database
-            - name: ORDER_DATABASE_HOST
-              value: "sc-order-service-database-service"
-            - name: ORDER_EXCHANGE_NAME
-              value: "order-delivered-exchange"
-            - name: ORDER_SHIPPING_EXCHANGE_NAME
-              value: "order-shipping-exchange"
-            - name: SPRING_REDIS_HOST
-              value: "sc-order-service-cache-service"
             - name: SPRING_REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: sc-order-service-cache-secret
                   key: password
-            - name: SPRING_RABBITMQ_HOST
-              value: "sc-message-broker-service"
             - name: SPRING_RABBITMQ_USERNAME
               valueFrom:
                 secretKeyRef:
@@ -63,5 +51,3 @@ spec:
                 secretKeyRef:
                   name: sc-message-broker-secret
                   key: password
-            - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_AMQP
-              value: TRACE

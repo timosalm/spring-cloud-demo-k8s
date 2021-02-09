@@ -21,14 +21,6 @@ spec:
           ports:
             - containerPort: 8080
           env:
-            - name: SHIPPING_IN_EXCHANGE
-              value: "order-shipping-exchange"
-            - name: SHIPPING_OUT_EXCHANGE
-              value: "order-delivered-exchange"
-            - name: SHIPPING_DURATION
-              value: "10000"
-            - name: SPRING_RABBITMQ_HOST
-              value: "sc-message-broker-service"
             - name: SPRING_RABBITMQ_USERNAME
               valueFrom:
                 secretKeyRef:

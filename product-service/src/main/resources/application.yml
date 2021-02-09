@@ -1,4 +1,12 @@
 spring:
   application.name: sc-product-service # for config server and service-registry
-  cloud.kubernetes.discovery.all-namespaces: true
+  cloud:
+    kubernetes:
+      discovery.all-namespaces: true
+      reload:
+        enabled: true
+        strategy: restart_context
 product-service.product-names:
+management:
+  endpoint.restart.enabled: true
+  endpoints.web.exposure.include: restart
