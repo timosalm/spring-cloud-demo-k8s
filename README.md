@@ -10,17 +10,8 @@
 
 1. Ensure you have a local Docker installed and running, then execute:
    ```
-   CONTAINER_REGISTRY_PREFIX=<your-registry-prefix>  # If you are using Docker Hub as a registry the prefix is just your Docker Hub ID
-   ./mvnw spring-boot:build-image -pl product-service -Dspring-boot.build-image.imageName=${CONTAINER_REGISTRY_PREFIX}/sc-product-service
-   ./mvnw spring-boot:build-image -pl order-service -Dspring-boot.build-image.imageName=${CONTAINER_REGISTRY_PREFIX}/sc-order-service
-   ./mvnw spring-boot:build-image -pl shipping-service -Dspring-boot.build-image.imageName=${CONTAINER_REGISTRY_PREFIX}/sc-shipping-service
-   ./mvnw spring-boot:build-image -pl gateway -Dspring-boot.build-image.imageName=${CONTAINER_REGISTRY_PREFIX}/sc-gateway
-
    docker login # If you are not using Docker Hub you have to specify the host of the registry 
-   docker push ${CONTAINER_REGISTRY_PREFIX}/sc-product-service
-   docker push ${CONTAINER_REGISTRY_PREFIX}/sc-order-service
-   docker push ${CONTAINER_REGISTRY_PREFIX}/sc-shipping-service
-   docker push ${CONTAINER_REGISTRY_PREFIX}/sc-gateway
+   ./build-and-push-containers.sh <your-registry-prefix> # If you are using Docker Hub as a registry the prefix is just your Docker Hub ID
    ```
 2. Create private registry secret resource
    ```
@@ -28,7 +19,10 @@
    ```
 3. Pods with the spring-cloud-kubernetes dependency requires access to the Kubernetes API. 
    See information [here](https://docs.spring.io/spring-cloud-kubernetes/docs/current/reference/html/#service-account) and change/delete the [k8s-deployment/rbac.yaml](k8s-deployment/rbac.yaml) based on your requirements.       
-4. Create all required Kubernetes resources
+4. (Optional) For the distributed tracing with Spring Cloud Sleuth and [VMware Tanzu Observability by Wavefront](https://tanzu.vmware.com/observability) you have to specify a Wavefront instance uri and api-token here [/k8s-deployment/wavefront-secret.yaml](/k8s-deployment/wavefront-secret.yaml).
+   Because the values are stored in a Kubernetes Secret, they have to be Base64 encoded. You can do this for example with your terminal by executing `echo "my-api-token" | base64`.
+   By default, the Wavefront Spring Boot Starter creates a Freemium account without a registration for you. See more details [here](https://docs.wavefront.com/wavefront_springboot.html) on how to get the credentials.
+5. Create all required Kubernetes resources
     ```
     kubectl create -f k8s-deployment
     ```

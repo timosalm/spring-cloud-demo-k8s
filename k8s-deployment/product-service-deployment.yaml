@@ -20,3 +20,16 @@ spec:
           image: tsalm/sc-product-service
           ports:
             - containerPort: 8080
+          env:
+          - name: MANAGEMENT_METRICS_EXPORT_WAVEFRONT_API_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: sc-wavefront-secret
+                key: api-token
+                optional: true
+          - name: MANAGEMENT_METRICS_EXPORT_WAVEFRONT_URI
+            valueFrom:
+              secretKeyRef:
+                name: sc-wavefront-secret
+                key: uri
+                optional: true

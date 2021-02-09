@@ -51,3 +51,15 @@ spec:
                 secretKeyRef:
                   name: sc-message-broker-secret
                   key: password
+            - name: MANAGEMENT_METRICS_EXPORT_WAVEFRONT_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: sc-wavefront-secret
+                  key: api-token
+                  optional: true
+            - name: MANAGEMENT_METRICS_EXPORT_WAVEFRONT_URI
+              valueFrom:
+                secretKeyRef:
+                  name: sc-wavefront-secret
+                  key: uri
+                  optional: true
