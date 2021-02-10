@@ -44,13 +44,13 @@ spec:
                   key: uri
                   optional: true
           livenessProbe:
-            initialDelaySeconds: 20
+            initialDelaySeconds: 60
             periodSeconds: 3
             httpGet:
               path: /actuator/health/liveness
               port: 8080
           readinessProbe:
-            initialDelaySeconds: 20
+            initialDelaySeconds: 60
             periodSeconds: 10
             httpGet:
               path: /actuator/health/readiness
