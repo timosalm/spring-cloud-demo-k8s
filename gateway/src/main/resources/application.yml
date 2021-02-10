@@ -10,3 +10,5 @@ spring:
       discovery.service-labels:
         gateway: expose
 wavefront.application.name: spring-cloud-demo-asc
+server.shutdown: graceful
+spring.lifecycle.timeout-per-shutdown-phase: 20s

@@ -30,5 +30,7 @@ order:
 logging.level.org.springframework.cache: TRACE
 management:
   endpoint.restart.enabled: true
-  endpoints.web.exposure.include: restart
+  endpoints.web.exposure.include: "*"
 wavefront.application.name: spring-cloud-demo-asc
+server.shutdown: graceful
+spring.lifecycle.timeout-per-shutdown-phase: 20s
