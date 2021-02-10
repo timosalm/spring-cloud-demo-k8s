@@ -9,3 +9,4 @@ spring:
       config.namespace: default
       discovery.service-labels:
         gateway: expose
+wavefront.application.name: spring-cloud-demo-asc

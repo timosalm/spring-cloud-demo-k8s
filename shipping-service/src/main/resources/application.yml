@@ -20,3 +20,4 @@ shipping:
 management:
   endpoint.restart.enabled: true
   endpoints.web.exposure.include: restart
+wavefront.application.name: spring-cloud-demo-asc
