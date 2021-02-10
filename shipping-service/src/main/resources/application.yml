@@ -20,6 +20,6 @@ shipping:
 management:
   endpoint.restart.enabled: true
   endpoints.web.exposure.include: "*"
-wavefront.application.name: spring-cloud-demo-asc
+wavefront.application.name: spring-cloud-demo-k8s
 server.shutdown: graceful
 spring.lifecycle.timeout-per-shutdown-phase: 20s
